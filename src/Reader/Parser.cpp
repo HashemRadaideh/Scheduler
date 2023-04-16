@@ -1,5 +1,67 @@
 #include "Reader/Parser.hpp"
+#include "Reader/AST.hpp"
+#include <iostream>
 
 namespace Reader {
-Parser::Parser() {}
+Parser::Parser(std::string &line, bool printTokens = false) : lexer(line) {
+  this->printTokens = printTokens;
+  this->current = next();
+  this->root = parse();
+}
+
+Parser::~Parser() { delete this->root; }
+
+Expression *Parser::getExpression() { return this->root; }
+
+Token Parser::next() {
+  Token token = lexer.lex();
+
+  if (printTokens) {
+    if (token.getType() != Type::skip && token.getType() != Type::eof) {
+      std::cout << token << std::endl;
+    }
+  }
+
+  if (token.getType() == Type::skip)
+    token = next();
+  this->current = token;
+
+  return token;
+}
+
+Expression *Parser::parse() { return this->parseProcess(); }
+
+Expression *Parser::parseProcess() {
+  Expression *left = parseCurrent();
+
+  while (current.getType() == Type::number) {
+    Number *arrival_time = (Number *)parseCurrent();
+    next();
+    Number *processing_time = (Number *)parseCurrent();
+
+    left = new Process((Name *)left, arrival_time, processing_time);
+  }
+
+  return left;
+}
+
+Expression *Parser::parseCurrent() {
+  if (this->current.getType() == Type::number) {
+    Number *node = new Number(this->current);
+    next();
+    return node;
+  }
+
+  if (this->current.getType() == Type::name) {
+    Name *node = new Name(this->current);
+    next();
+    return node;
+  }
+
+  if (this->current.getType() == Type::eof) {
+    return new Expression(Type::eof, this->current);
+  }
+
+  return new Expression();
+}
 } // namespace Reader

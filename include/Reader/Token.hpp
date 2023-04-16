@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 
 namespace Reader {
@@ -12,9 +13,9 @@ enum class Type {
 
 class Token {
 public:
-  Token(Type, std::string, int, int);
-  Token(Type);
   Token();
+  Token(Type);
+  Token(Type, std::string, int, int);
   Token(Token &&) = default;
   Token(const Token &) = default;
   Token &operator=(Token &&) = default;

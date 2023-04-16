@@ -30,15 +30,19 @@ bool Lexer::isAlpha(char character) {
 Token Lexer::lex() {
   switch (this->current) {
   case '\0':
+    this->next();
     return Token(Type::eof);
 
   case ' ':
+    this->next();
     return Token(Type::skip);
 
   case '\n':
+    this->next();
     return Token(Type::skip);
 
   case '\t':
+    this->next();
     return Token(Type::skip);
   }
 
@@ -58,6 +62,7 @@ Token Lexer::lex() {
 
     token.setContent(str);
 
+    this->next();
     return token;
   } else if (isAlpha(this->current) || this->current == '_') {
     Token token = Token();
@@ -73,9 +78,11 @@ Token Lexer::lex() {
 
     token.setContent(str);
 
+    this->next();
     return token;
   }
 
+  this->next();
   return Token();
 }
 } // namespace Reader
