@@ -2,6 +2,9 @@
 #include <iostream>
 #include <string>
 
+#include "OS/Scheduler.hpp"
+#include "Reader/Reader.hpp"
+
 auto main(int argc, char *argv[]) -> int {
   if (argc < 2) {
     std::cerr << "usage: scheduler <input_file>" << std::endl;
@@ -21,7 +24,8 @@ auto main(int argc, char *argv[]) -> int {
     content += line + "\n";
   }
 
-  std::cout << content << std::endl;
+  Reader::Reader generator = Reader::Reader(content);
+  OS::Scheduler scheduler = OS::Scheduler();
 
   return 0;
 }
