@@ -6,13 +6,14 @@ namespace OS {
 typedef long double ld;
 
 class Process {
- public:
+public:
   Process(std::string, ld, ld);
   Process(Process &&) = default;
   Process(const Process &) = default;
   Process &operator=(Process &&) = default;
   Process &operator=(const Process &) = default;
   ~Process();
+
   std::string getName() const;
   ld getArrivalTime() const;
   ld getProcessingTime() const;
@@ -27,7 +28,7 @@ class Process {
   void setResponseTime(ld);
   void process(ld);
 
- private:
+private:
   std::string name;
   ld arrival_time;
   ld processing_time;
@@ -38,4 +39,4 @@ class Process {
   ld waiting_time;
   bool started;
 };
-}  // namespace OS
+} // namespace OS

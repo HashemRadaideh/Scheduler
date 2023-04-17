@@ -5,19 +5,11 @@
 
 namespace Reader {
 Parser::Parser() : lexer() {
-  this->printTokens = false;
   this->current = next();
   this->root = nullptr;
 }
 
-Parser::Parser(bool printTokens) : lexer() {
-  this->printTokens = printTokens;
-  this->current = next();
-  this->root = nullptr;
-}
-
-Parser::Parser(std::string &line, bool printTokens = false) : lexer(line) {
-  this->printTokens = printTokens;
+Parser::Parser(std::string &line) : lexer(line) {
   this->current = next();
   this->root = nullptr;
 }
@@ -27,11 +19,8 @@ Parser::~Parser() { delete this->root; }
 Token Parser::next() {
   Token token = lexer.lex();
 
-  if (printTokens) {
-    if (token.getType() != Type::skip && token.getType() != Type::eof) {
-      std::cout << token << std::endl;
-    }
-  }
+  // if (token.getType() != Type::skip && token.getType() != Type::eof)
+  //   std::cout << token << std::endl;
 
   if (token.getType() == Type::skip)
     token = next();

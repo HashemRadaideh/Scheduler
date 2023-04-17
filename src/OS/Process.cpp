@@ -1,4 +1,5 @@
 #include "OS/Process.hpp"
+
 namespace OS {
 Process::Process(std::string name, ld arrival_time, ld processing_time) {
   this->name = name;
@@ -53,4 +54,4 @@ void Process::setCompletionTime(ld completion_time) {
 ld Process::getTurnaroundTime() const { return turnaround_time; }
 
 ld Process::getWaitingTime() const { return waiting_time; }
-}  // namespace OS
+} // namespace OS

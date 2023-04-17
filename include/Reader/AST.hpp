@@ -13,6 +13,7 @@ public:
   Expression &operator=(Expression &&) = default;
   Expression &operator=(const Expression &) = default;
   ~Expression();
+
   Type getType() const;
   void setType(Type);
   Token getToken() const;
@@ -58,6 +59,7 @@ public:
   Process &operator=(Process &&) = default;
   Process &operator=(const Process &) = default;
   ~Process();
+
   std::string getName() const;
   ld getArrivalTime() const;
   ld getProcessingTime() const;

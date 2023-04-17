@@ -21,7 +21,7 @@ Reader::Reader(const char *file_name) {
     content += line + "\n";
   }
 
-  this->parser = Parser(content, false);
+  this->parser = Parser(content);
 
   this->root = parser.parse();
   this->number_of_processes = std::stoi(this->root->getContent());

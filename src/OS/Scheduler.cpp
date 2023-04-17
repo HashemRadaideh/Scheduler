@@ -127,6 +127,8 @@ void Scheduler::schedule() {
     std::cout << process.getName() << " " << process.getArrivalTime() << " "
               << process.getProcessingTime() << std::endl;
 
+  std::cout << std::endl;
+
   longestJobFirst();
   // longestRemainingJobFirst();
 

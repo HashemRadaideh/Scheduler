@@ -1,9 +1,9 @@
 #pragma once
 
+#include "./Process.hpp"
+
 #include <cstddef>
 #include <vector>
-
-#include "./Process.hpp"
 
 namespace OS {
 class Scheduler {
@@ -14,6 +14,7 @@ public:
   Scheduler &operator=(Scheduler &&) = default;
   Scheduler &operator=(const Scheduler &) = default;
   ~Scheduler();
+
   void schedule();
   void longestJobFirst();
   void longestRemainingJobFirst();

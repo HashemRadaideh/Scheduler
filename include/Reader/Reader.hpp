@@ -1,7 +1,7 @@
 #pragma once
 
+#include "./Parser.hpp"
 #include "OS/Process.hpp"
-#include "Reader/Parser.hpp"
 
 #include <cstddef>
 #include <string>
@@ -16,6 +16,7 @@ public:
   Reader &operator=(Reader &&) = default;
   Reader &operator=(const Reader &) = default;
   ~Reader();
+
   void read();
   std::vector<OS::Process> getProcesses() const;
   std::size_t getNumberOfProcesses() const;

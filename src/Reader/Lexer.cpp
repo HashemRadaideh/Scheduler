@@ -35,15 +35,15 @@ bool Lexer::isAlpha(char character) {
 
 Token Lexer::lex() {
   switch (this->current) {
-    case '\0':
-      this->next();
-      return Token(Type::eof);
+  case '\0':
+    this->next();
+    return Token(Type::eof);
 
-    case ' ':
-    case '\n':
-    case '\t':
-      this->next();
-      return Token(Type::skip);
+  case ' ':
+  case '\n':
+  case '\t':
+    this->next();
+    return Token(Type::skip);
   }
 
   if (isNumber(this->current)) {
@@ -87,4 +87,4 @@ Token Lexer::lex() {
   this->next();
   return Token();
 }
-}  // namespace Reader
+} // namespace Reader

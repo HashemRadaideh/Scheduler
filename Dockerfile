@@ -19,6 +19,6 @@ COPY . .
 
 RUN cmake -B/build && cmake --build /build
 
-# ENTRYPOINT ["/build/scheduler"]
-# cmd ["/build/scheduler", "/test/in.txt"]
+ENTRYPOINT ["/work/build/scheduler", "/work/test/in.txt"]
+# CMD ["/work/build/scheduler", "/work/test/in.txt"]
 

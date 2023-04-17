@@ -23,6 +23,7 @@ public:
   Token &operator=(Token &&) = default;
   Token &operator=(const Token &) = default;
   ~Token();
+
   friend std::ostream &operator<<(std::ostream &, const Token &);
   static std::string getTypeof(Type);
   Type getType() const;

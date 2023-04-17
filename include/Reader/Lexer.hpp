@@ -14,6 +14,7 @@ public:
   Lexer &operator=(Lexer &&) = default;
   Lexer &operator=(const Lexer &) = default;
   ~Lexer();
+
   Token lex();
   void next();
 

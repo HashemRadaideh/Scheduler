@@ -9,8 +9,7 @@ namespace Reader {
 class Parser {
 public:
   Parser();
-  Parser(bool);
-  Parser(std::string &, bool);
+  Parser(std::string &);
   Parser(Parser &&) = default;
   Parser(const Parser &) = default;
   Parser &operator=(Parser &&) = default;
@@ -22,7 +21,6 @@ public:
   Expression *parseCurrent();
 
 private:
-  bool printTokens;
   Lexer lexer;
   Expression *root;
   Token current;
