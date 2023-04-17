@@ -3,7 +3,7 @@
 #include <string>
 
 namespace Reader {
-typedef long double ld;
+typedef long double d96;
 
 enum class Type {
   name = 0,
@@ -17,7 +17,7 @@ class Token {
 public:
   Token();
   Token(Type);
-  Token(Type, std::string, ld, ld);
+  Token(Type, std::string, d96, d96);
   Token(Token &&) = default;
   Token(const Token &) = default;
   Token &operator=(Token &&) = default;
@@ -30,15 +30,15 @@ public:
   void setType(Type);
   std::string getContent() const;
   void setContent(std::string);
-  ld getStart() const;
-  void setStart(ld);
-  ld getEnd() const;
-  void setEnd(ld);
+  d96 getStart() const;
+  void setStart(d96);
+  d96 getEnd() const;
+  void setEnd(d96);
 
 private:
   Type type;
   std::string content;
-  ld start;
-  ld end;
+  d96 start;
+  d96 end;
 };
 } // namespace Reader

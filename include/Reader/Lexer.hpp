@@ -26,6 +26,6 @@ protected:
 private:
   std::string text;
   char current;
-  ld position;
+  d96 position;
 };
 } // namespace Reader

@@ -51,11 +51,11 @@ Process::~Process() {}
 
 std::string Process::getName() const { return this->name->getContent(); }
 
-ld Process::getArrivalTime() const {
+d96 Process::getArrivalTime() const {
   return std::stoi(this->arrival_time->getContent());
 }
 
-ld Process::getProcessingTime() const {
+d96 Process::getProcessingTime() const {
   return std::stoi(this->processing_time->getContent());
 }
 } // namespace Reader

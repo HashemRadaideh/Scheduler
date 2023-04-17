@@ -1,7 +1,7 @@
 #include "OS/Process.hpp"
 
 namespace OS {
-Process::Process(std::string name, ld arrival_time, ld processing_time) {
+Process::Process(std::string name, d96 arrival_time, d96 processing_time) {
   this->name = name;
   this->arrival_time = arrival_time;
   this->processing_time = processing_time;
@@ -17,23 +17,23 @@ Process::~Process() {}
 
 std::string Process::getName() const { return this->name; }
 
-ld Process::getArrivalTime() const { return this->arrival_time; }
+d96 Process::getArrivalTime() const { return this->arrival_time; }
 
-ld Process::getProcessingTime() const { return this->processing_time; }
+d96 Process::getProcessingTime() const { return this->processing_time; }
 
 bool Process::isAlive() const { return this->remaining_time != 0; }
 
 bool Process::hasStarted() { return this->started; }
 
-void Process::setResponseTime(ld response_time) {
+void Process::setResponseTime(d96 response_time) {
   this->response_time = response_time - this->arrival_time;
   this->started = true;
   ;
 }
 
-ld Process::getResponseTime() const { return this->response_time; }
+d96 Process::getResponseTime() const { return this->response_time; }
 
-void Process::process(ld time_unit) {
+void Process::process(d96 time_unit) {
   if (remaining_time >= time_unit) {
     remaining_time -= time_unit;
   } else {
@@ -41,17 +41,17 @@ void Process::process(ld time_unit) {
   }
 }
 
-ld Process::getRemainingTime() const { return this->remaining_time; }
+d96 Process::getRemainingTime() const { return this->remaining_time; }
 
 bool Process::isCompleted() const { return remaining_time == 0; }
 
-void Process::setCompletionTime(ld completion_time) {
+void Process::setCompletionTime(d96 completion_time) {
   this->completion_time = completion_time;
   this->turnaround_time = completion_time - arrival_time;
   this->waiting_time = getTurnaroundTime() - processing_time;
 }
 
-ld Process::getTurnaroundTime() const { return turnaround_time; }
+d96 Process::getTurnaroundTime() const { return turnaround_time; }
 
-ld Process::getWaitingTime() const { return waiting_time; }
+d96 Process::getWaitingTime() const { return waiting_time; }
 } // namespace OS

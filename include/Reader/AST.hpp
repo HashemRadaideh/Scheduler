@@ -61,8 +61,8 @@ public:
   ~Process();
 
   std::string getName() const;
-  ld getArrivalTime() const;
-  ld getProcessingTime() const;
+  d96 getArrivalTime() const;
+  d96 getProcessingTime() const;
 
 private:
   Name *name;

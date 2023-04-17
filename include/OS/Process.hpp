@@ -3,11 +3,11 @@
 #include <string>
 
 namespace OS {
-typedef long double ld;
+typedef long double d96;
 
 class Process {
 public:
-  Process(std::string, ld, ld);
+  Process(std::string, d96, d96);
   Process(Process &&) = default;
   Process(const Process &) = default;
   Process &operator=(Process &&) = default;
@@ -15,28 +15,28 @@ public:
   ~Process();
 
   std::string getName() const;
-  ld getArrivalTime() const;
-  ld getProcessingTime() const;
-  ld getRemainingTime() const;
-  ld getTurnaroundTime() const;
-  ld getWaitingTime() const;
-  ld getResponseTime() const;
+  d96 getArrivalTime() const;
+  d96 getProcessingTime() const;
+  d96 getRemainingTime() const;
+  d96 getTurnaroundTime() const;
+  d96 getWaitingTime() const;
+  d96 getResponseTime() const;
   bool isAlive() const;
   bool isCompleted() const;
   bool hasStarted();
-  void setCompletionTime(ld);
-  void setResponseTime(ld);
-  void process(ld);
+  void setCompletionTime(d96);
+  void setResponseTime(d96);
+  void process(d96);
 
 private:
   std::string name;
-  ld arrival_time;
-  ld processing_time;
-  ld remaining_time;
-  ld response_time;
-  ld completion_time;
-  ld turnaround_time;
-  ld waiting_time;
+  d96 arrival_time;
+  d96 processing_time;
+  d96 remaining_time;
+  d96 response_time;
+  d96 completion_time;
+  d96 turnaround_time;
+  d96 waiting_time;
   bool started;
 };
 } // namespace OS

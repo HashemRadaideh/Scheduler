@@ -21,7 +21,7 @@ public:
   bool match(Process process);
 
 private:
-  ld number_of_processes;
+  d96 number_of_processes;
   std::vector<OS::Process> processes;
   std::vector<Process> completed_processes;
   std::vector<Process> ready_queue;

@@ -3,7 +3,7 @@
 #include <iostream>
 
 namespace Reader {
-Token::Token(Type type, std::string value, ld start, ld end) {
+Token::Token(Type type, std::string value, d96 start, d96 end) {
   this->type = type;
   this->content = value;
   this->start = start;
@@ -40,13 +40,13 @@ std::string Token::getContent() const { return this->content; }
 
 void Token::setContent(std::string value) { this->content = value; }
 
-ld Token::getStart() const { return this->start; }
+d96 Token::getStart() const { return this->start; }
 
-void Token::setStart(ld position) { this->start = position; }
+void Token::setStart(d96 position) { this->start = position; }
 
-ld Token::getEnd() const { return this->end; }
+d96 Token::getEnd() const { return this->end; }
 
-void Token::setEnd(ld position) { this->end = position; }
+void Token::setEnd(d96 position) { this->end = position; }
 
 std::string Token::getTypeof(Type currentType) {
   if (currentType == Type::name)
