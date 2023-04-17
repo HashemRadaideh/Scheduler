@@ -1,17 +1,28 @@
 #include "Reader/Parser.hpp"
 #include "Reader/AST.hpp"
+
 #include <iostream>
 
 namespace Reader {
+Parser::Parser() : lexer() {
+  this->printTokens = false;
+  this->current = next();
+  this->root = nullptr;
+}
+
+Parser::Parser(bool printTokens) : lexer() {
+  this->printTokens = printTokens;
+  this->current = next();
+  this->root = nullptr;
+}
+
 Parser::Parser(std::string &line, bool printTokens = false) : lexer(line) {
   this->printTokens = printTokens;
   this->current = next();
-  this->root = parse();
+  this->root = nullptr;
 }
 
 Parser::~Parser() { delete this->root; }
-
-Expression *Parser::getExpression() { return this->root; }
 
 Token Parser::next() {
   Token token = lexer.lex();
@@ -24,19 +35,17 @@ Token Parser::next() {
 
   if (token.getType() == Type::skip)
     token = next();
+
   this->current = token;
 
   return token;
 }
 
-Expression *Parser::parse() { return this->parseProcess(); }
-
-Expression *Parser::parseProcess() {
+Expression *Parser::parse() {
   Expression *left = parseCurrent();
 
-  while (current.getType() == Type::number) {
+  while (this->current.getType() == Type::number) {
     Number *arrival_time = (Number *)parseCurrent();
-    next();
     Number *processing_time = (Number *)parseCurrent();
 
     left = new Process((Name *)left, arrival_time, processing_time);

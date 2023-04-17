@@ -1,6 +1,12 @@
 #include "Reader/Lexer.hpp"
 
 namespace Reader {
+Lexer::Lexer() {
+  this->text = "";
+  this->position = 0;
+  this->current = '\0';
+}
+
 Lexer::Lexer(std::string &text) {
   this->text = text;
   this->position = 0;
@@ -29,21 +35,15 @@ bool Lexer::isAlpha(char character) {
 
 Token Lexer::lex() {
   switch (this->current) {
-  case '\0':
-    this->next();
-    return Token(Type::eof);
+    case '\0':
+      this->next();
+      return Token(Type::eof);
 
-  case ' ':
-    this->next();
-    return Token(Type::skip);
-
-  case '\n':
-    this->next();
-    return Token(Type::skip);
-
-  case '\t':
-    this->next();
-    return Token(Type::skip);
+    case ' ':
+    case '\n':
+    case '\t':
+      this->next();
+      return Token(Type::skip);
   }
 
   if (isNumber(this->current)) {
@@ -67,6 +67,8 @@ Token Lexer::lex() {
   } else if (isAlpha(this->current) || this->current == '_') {
     Token token = Token();
 
+    token.setType(Type::name);
+
     std::string str = {this->current};
 
     token.setStart(this->position - 1);
@@ -85,4 +87,4 @@ Token Lexer::lex() {
   this->next();
   return Token();
 }
-} // namespace Reader
+}  // namespace Reader

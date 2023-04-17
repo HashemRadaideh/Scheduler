@@ -1,6 +1,7 @@
 #pragma once
 
 #include "./Token.hpp"
+
 #include <string>
 
 typedef unsigned long long u64;
@@ -8,6 +9,7 @@ typedef unsigned long long u64;
 namespace Reader {
 class Lexer {
 public:
+  Lexer();
   Lexer(std::string &);
   Lexer(Lexer &&) = default;
   Lexer(const Lexer &) = default;

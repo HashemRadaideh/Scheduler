@@ -1,4 +1,5 @@
 #include "Reader/Token.hpp"
+
 #include <iostream>
 
 namespace Reader {

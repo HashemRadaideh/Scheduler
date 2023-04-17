@@ -2,11 +2,14 @@
 
 #include "./AST.hpp"
 #include "./Lexer.hpp"
+
 #include <string>
 
 namespace Reader {
 class Parser {
 public:
+  Parser();
+  Parser(bool);
   Parser(std::string &, bool);
   Parser(Parser &&) = default;
   Parser(const Parser &) = default;
@@ -14,10 +17,8 @@ public:
   Parser &operator=(const Parser &) = default;
   ~Parser();
 
-  Expression *getExpression();
   Token next();
   Expression *parse();
-  Expression *parseProcess();
   Expression *parseCurrent();
 
 private:

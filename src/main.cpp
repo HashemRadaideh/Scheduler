@@ -1,6 +1,4 @@
-#include <fstream>
 #include <iostream>
-#include <string>
 
 #include "OS/Scheduler.hpp"
 #include "Reader/Reader.hpp"
@@ -11,21 +9,17 @@ auto main(int argc, char *argv[]) -> int {
     return 1;
   }
 
-  std::ifstream file = std::ifstream(argv[1]);
+  Reader::Reader reader = Reader::Reader(argv[1]);
 
-  if (file.fail()) {
-    std::cerr << "File not found\n";
-    return 1;
+  std::cout << reader.getNumberOfProcesses() << std::endl;
+
+  for (auto x : reader.getProcesses()) {
+    std::cout << x.getName() << " " << x.getArrivalTime() << " "
+              << x.getProcessingTime() << std::endl;
   }
 
-  std::string line = "";
-  std::string content = "";
-  while (std::getline(file, line)) {
-    content += line + "\n";
-  }
-
-  Reader::Reader generator = Reader::Reader(content);
-  OS::Scheduler scheduler = OS::Scheduler();
+  OS::Scheduler scheduler =
+      OS::Scheduler(reader.getNumberOfProcesses(), reader.getProcesses());
 
   return 0;
 }
