@@ -11,15 +11,10 @@ auto main(int argc, char *argv[]) -> int {
 
   Reader::Reader reader = Reader::Reader(argv[1]);
 
-  std::cout << reader.getNumberOfProcesses() << std::endl;
-
-  for (auto x : reader.getProcesses()) {
-    std::cout << x.getName() << " " << x.getArrivalTime() << " "
-              << x.getProcessingTime() << std::endl;
-  }
-
   OS::Scheduler scheduler =
       OS::Scheduler(reader.getNumberOfProcesses(), reader.getProcesses());
+
+  scheduler.schedule();
 
   return 0;
 }

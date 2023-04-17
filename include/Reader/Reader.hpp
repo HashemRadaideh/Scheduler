@@ -17,8 +17,8 @@ public:
   Reader &operator=(const Reader &) = default;
   ~Reader();
   void read();
-  std::vector<OS::Process> getProcesses();
-  std::size_t getNumberOfProcesses();
+  std::vector<OS::Process> getProcesses() const;
+  std::size_t getNumberOfProcesses() const;
 
 private:
   Parser parser;

@@ -4,8 +4,6 @@
 
 #include <string>
 
-typedef unsigned long long u64;
-
 namespace Reader {
 class Lexer {
 public:
@@ -27,6 +25,6 @@ protected:
 private:
   std::string text;
   char current;
-  u64 position;
+  ld position;
 };
 } // namespace Reader

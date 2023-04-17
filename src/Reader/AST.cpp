@@ -15,13 +15,13 @@ Expression::~Expression() {}
 
 void Expression::setType(Type type) { this->type = type; }
 
-Type Expression::getType() { return this->type; }
+Type Expression::getType() const { return this->type; }
 
-Token Expression::getToken() { return this->token; }
+Token Expression::getToken() const { return this->token; }
 
 void Expression::setToken(Token token) { this->token = token; }
 
-std::string Expression::getContent() { return this->token.getContent(); }
+std::string Expression::getContent() const { return this->token.getContent(); }
 
 Number::Number(Token number) {
   this->setType(Type::number);
@@ -49,13 +49,13 @@ Process::Process(Name *name, Number *arrival_time, Number *processing_time) {
 
 Process::~Process() {}
 
-std::string Process::getName() { return this->name->getContent(); }
+std::string Process::getName() const { return this->name->getContent(); }
 
-u64 Process::getArrivalTime() {
+ld Process::getArrivalTime() const {
   return std::stoi(this->arrival_time->getContent());
 }
 
-u64 Process::getProcessingTime() {
+ld Process::getProcessingTime() const {
   return std::stoi(this->processing_time->getContent());
 }
 } // namespace Reader

@@ -38,7 +38,11 @@ Reader::Reader(const char *file_name) {
 
 Reader::~Reader() {}
 
-std::vector<OS::Process> Reader::getProcesses() { return this->processes; }
+std::vector<OS::Process> Reader::getProcesses() const {
+  return this->processes;
+}
 
-std::size_t Reader::getNumberOfProcesses() { return this->number_of_processes; }
+std::size_t Reader::getNumberOfProcesses() const {
+  return this->number_of_processes;
+}
 } // namespace Reader

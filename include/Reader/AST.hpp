@@ -2,9 +2,8 @@
 
 #include "./Token.hpp"
 
-typedef unsigned long long u64;
-
 namespace Reader {
+
 class Expression {
 public:
   Expression();
@@ -14,11 +13,11 @@ public:
   Expression &operator=(Expression &&) = default;
   Expression &operator=(const Expression &) = default;
   ~Expression();
-  Type getType();
+  Type getType() const;
   void setType(Type);
-  Token getToken();
+  Token getToken() const;
   void setToken(Token);
-  std::string getContent();
+  std::string getContent() const;
 
 private:
   Type type;
@@ -59,9 +58,9 @@ public:
   Process &operator=(Process &&) = default;
   Process &operator=(const Process &) = default;
   ~Process();
-  std::string getName();
-  u64 getArrivalTime();
-  u64 getProcessingTime();
+  std::string getName() const;
+  ld getArrivalTime() const;
+  ld getProcessingTime() const;
 
 private:
   Name *name;

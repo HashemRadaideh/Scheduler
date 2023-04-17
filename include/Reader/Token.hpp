@@ -3,6 +3,8 @@
 #include <string>
 
 namespace Reader {
+typedef long double ld;
+
 enum class Type {
   name = 0,
   number = 1,
@@ -15,7 +17,7 @@ class Token {
 public:
   Token();
   Token(Type);
-  Token(Type, std::string, int, int);
+  Token(Type, std::string, ld, ld);
   Token(Token &&) = default;
   Token(const Token &) = default;
   Token &operator=(Token &&) = default;
@@ -23,19 +25,19 @@ public:
   ~Token();
   friend std::ostream &operator<<(std::ostream &, const Token &);
   static std::string getTypeof(Type);
-  Type getType();
+  Type getType() const;
   void setType(Type);
-  std::string getContent();
+  std::string getContent() const;
   void setContent(std::string);
-  int getStart();
-  void setStart(int);
-  int getEnd();
-  void setEnd(int);
+  ld getStart() const;
+  void setStart(ld);
+  ld getEnd() const;
+  void setEnd(ld);
 
 private:
   Type type;
   std::string content;
-  int start;
-  int end;
+  ld start;
+  ld end;
 };
 } // namespace Reader
