@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <string>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -37,11 +38,10 @@ bool Scheduler::match(Process process) {
 void Scheduler::longestJobFirst() {
   for (int current_time = 0;
        completed_processes.size() != number_of_processes;) {
-    for (auto &process : processes) {
-      if (process.getArrivalTime() <= current_time && !match(process)) {
+
+    for (auto &process : processes)
+      if (process.getArrivalTime() <= current_time && !match(process))
         ready_queue.emplace_back(process);
-      }
-    }
 
     std::sort(begin(this->ready_queue), end(this->ready_queue),
               [](const Process &p1, const Process &p2) {
@@ -79,6 +79,43 @@ void Scheduler::longestJobFirst() {
   }
 }
 
+void Scheduler::longestRemainingJobFirst() {
+  for (int current_time = 0; completed_processes.size() != number_of_processes;
+       current_time++) {
+    for (auto &process : processes)
+      if (process.getArrivalTime() == current_time)
+        ready_queue.emplace_back(process);
+
+    std::sort(begin(this->ready_queue), end(this->ready_queue),
+              [](const Process &p1, const Process &p2) {
+                return p1.getRemainingTime() > p2.getRemainingTime();
+              });
+
+    if (ready_queue.empty()) {
+      current_time = processes.front().getArrivalTime();
+      continue;
+    }
+
+    Process &current_process = ready_queue.front();
+
+    if (!current_process.hasStarted())
+      current_process.setResponseTime(current_time);
+
+    current_process.process(1);
+
+    if (current_process.isCompleted()) {
+      current_process.setCompletionTime(current_time);
+
+      total_waiting_time += current_process.getWaitingTime();
+      total_turnaround_time += current_process.getTurnaroundTime();
+
+      completed_processes.emplace_back(current_process);
+
+      ready_queue.erase(ready_queue.begin());
+    }
+  }
+}
+
 void Scheduler::schedule() {
   if (processes.empty()) {
     return;
@@ -91,21 +128,22 @@ void Scheduler::schedule() {
               << process.getProcessingTime() << std::endl;
 
   longestJobFirst();
+  // longestRemainingJobFirst();
 
+  std::string container = "";
   for (auto &process : completed_processes) {
     std::cout << process.getName()
               << ": (response = " << process.getResponseTime()
               << ", turnaround = " << process.getTurnaroundTime()
               << ", delay = " << process.getWaitingTime() << ")" << std::endl;
+
+    container += process.getName();
   }
 
-  for (auto &process : completed_processes) {
-    std::cout << process.getName();
-  }
-
-  std::cout << "\nAverage waiting time: "
-            << (double)total_waiting_time / number_of_processes << std::endl;
-  std::cout << "Average turnaround time: "
+  std::cout << container << std::endl
+            << "\nAverage waiting time: "
+            << (double)total_waiting_time / number_of_processes << std::endl
+            << "Average turnaround time: "
             << (double)total_turnaround_time / number_of_processes << std::endl;
 }
 } // namespace OS

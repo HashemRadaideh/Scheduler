@@ -16,6 +16,7 @@ public:
   ~Scheduler();
   void schedule();
   void longestJobFirst();
+  void longestRemainingJobFirst();
   bool match(Process process);
 
 private:
